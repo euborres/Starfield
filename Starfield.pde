@@ -1,33 +1,36 @@
 //your code here
-NormalParticle[] hi;
+Particle[] hi;
+
 void setup()
 {
 	//your code here
 	size(500,500);
-	hi = new NormalParticle [200];
+	hi = new Particle [800];
 	for(int i = 0; i < hi.length; i++){
-		hi[i] = new NormalParticle(250,250);
+		hi[i] = new NormalParticle();
 	}
+		hi[0] = new OddballParticle();
+		hi[1] = new JumboParticle();
 }
 void draw()
 {
 	//your code here
+	
 	background(0);
-	for(int i = 0; i < hi.length; i++){
+	for(int i = 0; i < hi.length; i++){			
 		hi[i].show();
 		hi[i].move();
 	}
-	
 }
-class NormalParticle
+class NormalParticle implements Particle
 {
 	//your code here
 	int myCol;
 	double myX,myY,dSpeed,dAngle;
-	NormalParticle(double x, double y){
-		myX = x;
-		myY = y;
-		myCol = color(156,18,218);
+	NormalParticle(){
+		myX = 250;
+		myY = 250;
+		myCol = color(255);
 		dSpeed = (double)(Math.random() * 10);
 		dAngle = ((double)(Math.random() * 2.1)) * Math.PI;
 	}
@@ -37,7 +40,7 @@ class NormalParticle
 	}
 	void show(){
 		fill(myCol);
-		ellipse((float)myX, (float)myY, 10,10);
+		ellipse((float)myX, (float)myY, 5,5);
 	}
 }
 interface Particle
@@ -46,18 +49,46 @@ interface Particle
 	public void show();
 	public void move();
 	}
-class OddballParticle //uses an interface
+class OddballParticle implements Particle//uses an interface
 {
 	//your code here
+	double x,y,w,h,dSpeed,dAngle;
 	OddballParticle(){
-
+		x = 250;
+		y = 250;
+		h = 50;
+		w = 50;
+		dSpeed = (double)(Math.random() * 10);
+		dAngle = ((double)(Math.random() * 2.1)) * Math.PI;
+	}
+	public void show(){
+		fill(123,210,62);
+		rect((float)x,(float)y,(float)h,(float)w);
+	}
+	public void move(){
+		x = x + (Math.cos(dAngle) * dSpeed) - 3;
+		y = y + (Math.sin(dAngle) * dSpeed) - 1;
 	}
 }
-class JumboParticle //uses inheritance
+class JumboParticle extends NormalParticle//uses inheritance
 {
 	//your code here
+	int myCol;
+	double myX,myY,dSpeed,dAngle;
 	JumboParticle(){
-
+		myX = 250;
+		myY = 250;
+		myCol = color(138,201,236);
+		dSpeed = (double)(Math.random() * 10);
+		dAngle = ((double)(Math.random() * 2.1)) * Math.PI;
+	}
+	public void show(){
+		fill(myCol);
+		ellipse((float)myX, (float)myY, 20,20);
+	}
+	public void move(){
+		myX = myX + (Math.cos(dAngle) * dSpeed) - 3;
+		myY = myY + (Math.sin(dAngle) * dSpeed) - 1;
 	}
 }
 
