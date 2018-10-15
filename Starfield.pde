@@ -70,8 +70,8 @@ class OddballParticle implements Particle//uses an interface
 		rect((float)x,(float)y,(float)h,(float)w);
 	}
 	public void move(){
-		x = x + (Math.cos(dAngle) * dSpeed);
-		y = y + (Math.sin(dAngle) * dSpeed) ;
+		x = y - (Math.cos(dAngle) + dSpeed);
+		y = x + (Math.cos(dAngle) * dSpeed) ;
 	}
 }
 class JumboParticle extends NormalParticle//uses inheritance
